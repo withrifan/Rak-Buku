@@ -12,11 +12,19 @@
   <body>
     <header class="head_bar">
       <h1 class="head_bar_title">Bookshelf Apps</h1>
+      <section class="searchBook_section">
+        <form id="searchBuku">
+          <label for="searchJudulBuku"></label>
+          <input id="searchJudulBuku" type="text" placeholder="Cari Judul Buku"/>
+          <button id="searchSubmit" type="submit">Cari</button>
+        </form>
+      </section>
     </header>
+
     <main>
       <section class="input_section">
         <h2>Masukkan Buku Baru</h2>
-        <form id="inputBook">
+        <form id="inputBuku">
           <div class="input">
             <label for="inputJudulBuku">Judul</label>
             <input id="inputJudulBuku" type="text" required />
@@ -30,19 +38,10 @@
             <input id="inputTahunBuku" type="number" required />
           </div>
           <div class="input_inline">
-            <label for="inputBookIsComplete">Selesai dibaca</label>
-            <input id="inputBookIsComplete" type="checkbox" />
+            <label for="inputBukuSudahSelesai">Selesai dibaca</label>
+            <input id="inputBukuSudahSelesai" type="checkbox" />
           </div>
-          <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span>Belum selesai dibaca</span></button>
-        </form>
-      </section>
-
-      <section class="search_section">
-        <h2>Cari Buku</h2>
-        <form id="searchBook">
-          <label for="searchBookTitle">Judul</label>
-          <input id="searchBookTitle" type="text" />
-          <button id="searchSubmit" type="submit">Cari</button>
+          <button id="bookSubmit" type="submit">Masukkan Buku Anda ke rak <span>Belum selesai dibaca</span></button>
         </form>
       </section>
 
