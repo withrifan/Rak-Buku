@@ -95,28 +95,13 @@ function undoBookFromCompleted(bookId) {
 function searchBooks() {
     const judul = document.getElementById('searchJudulBuku').value;
 
-    const serializedData = localStorage.getItem(STORAGE_KEY);
-    const data = JSON.parse(serializedData);
-    const searchedBooks = data.filter(function (book) {
-        return book.judul.toLowerCase().includes(judul);
+    const searchedBook = books.filter(function (book) {
+        const bookTarget = book.judul.toLowerCase();
+
+        return bookTarget.includes(judul.toLowerCase());
     });
 
-    if (searchedBooks.length === 0) {
-        alert('Buku Anda tidak ditemukan dalam rak!');
-        return location.reload();
-    }
-
-    if (judul !== '') {
-        books = [];
-        for (const book of searchedBooks) {
-            books.push(book);
-        }
-
-        document.dispatchEvent(new Event(RENDER_EVENT));
-    } else {
-        books = [];
-        loadDataFromStorage();
-    }
+    return searchedBook;
 }
 
 function loadDataFromStorage() {
@@ -197,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
     searchSubmit.addEventListener('submit', function (event) {
         event.preventDefault();
         searchBooks();
+        document.dispatchEvent(new Event(RENDER_EVENT));
     });
 
     completeCheckbox.addEventListener('change', function () {
@@ -220,7 +206,7 @@ document.addEventListener(RENDER_EVENT, function () {
     const completedBookList = document.getElementById('completeBookshelfList');
     completedBookList.innerText = '';
 
-    for (const bookItem of books) {
+    for (const bookItem of searchBooks()) {
         const bookElement = makeBook(bookItem);
         if (!bookItem.sudahSelesai) uncompletedBookList.append(bookElement);
         else completedBookList.append(bookElement);
